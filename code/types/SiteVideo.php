@@ -1,17 +1,17 @@
 <?php
 
 class SiteVideo extends DataExtension implements SiteMediaType_Interface {
-	public static $plural_name = 'Videos';
-	public static $media_upload_folder = 'Videos';
-	public static $allowed_file_types = array('flv','mp4');
+	static $plural_name = 'Videos';
+	static $media_upload_folder = 'Videos';
+	static $allowed_file_types = array('flv','mp4');
 	
-	private static $has_one = array(
+	static $has_one = array(
 		'Video'				=> 'File',
 		'PosterImage'		=> 'Image',
 		'ThumbnailImage'	=> 'Image'
 	);
 	
-	private static $db = array(
+	static $db = array(
 		'Caption'	=> 'Varchar(255)'
 	);
 	

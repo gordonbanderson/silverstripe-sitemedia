@@ -1,15 +1,15 @@
 <?php 
 
 class SiteMedia extends DataObject {
-	public static $plural_name = 'SiteMedias';
+	static $plural_name = 'SiteMedias';
 	
-	public static $default_thumbnail_width = 96;
-	public static $default_thumbnail_height = 96;
+	static $default_thumbnail_width = 96;
+	static $default_thumbnail_height = 96;
 	
-	public static $default_width = 640;
-	public static $default_height = 360;
+	static $default_width = 640;
+	static $default_height = 360;
 	
-	private static $summary_fields = array(
+	static $summary_fields = array(
 		'CMSThumbnail'	=> 'Thumbnail',
 		'Title'			=> 'Title',
 		'Type'			=> 'Type',
@@ -17,17 +17,17 @@ class SiteMedia extends DataObject {
 		'LastEdited'	=> 'Updated'
 	);
 	
-	private static $db = array(
+	static $db = array(
 		//'MediaType'		=> 'Enum()', [dynamically applied via SiteRegistryInit]
 		'Title'			=> 'Varchar',
 		'Private'		=> 'Boolean'
 	);
 	
-	private static $searchable_fields = array(
+	static $searchable_fields = array(
 			'Title'
 	);
 	
-	private static $default_sort = "Title ASC";
+	static $default_sort = "Title ASC";
 	
 	public function getCMSFields($params = null){
 		
