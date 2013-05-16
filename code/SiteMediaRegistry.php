@@ -32,7 +32,7 @@ class SiteMediaRegistry {
 		elseif(!in_array($class,self::$decorated_classes))
 		{
 			self::$decorated_classes[] = $class;
-			Config::inst()->update($class, 'extensions', array('SiteMediaDecoration'));
+			$class::add_extension('SiteMediaDecoration');
 		}
 		
 		if(!is_array($allowed_types))
@@ -58,7 +58,7 @@ class SiteMediaRegistry {
 		if(!in_array($type, self::$media_types))
 		{
 			self::$media_types[] = $type;
-			Config::inst()->update('SiteMedia', 'extensions', array($type));
+			SiteMedia::add_extension($type);
 		}
 	}
 	
@@ -67,14 +67,16 @@ class SiteMediaRegistry {
 	 */
 	public static function init()
 	{
-		$db = array('MediaType' => "Enum(\"" . implode(', ',self::$media_types) . "\")");
+		$types = implode(', ',self::$media_types);
 		$belongs_many_many = array();
 		foreach(self::$decorated_classes as $class)
 		{
 			$belongs_many_many[$class] = $class;
 		}
 		
-		Config::inst()->update('SiteMedia','belongs_many_many',$belongs_many_many);
-		Config::inst()->update('SiteMedia','db',$db);
+		Config::inst()->update('SiteMediaDecorator','belongs_many_many',$belongs_many_many);
+		Config::inst()->update('SiteMediaDecorator','db',array('MediaType' => "Enum(\"$types\")"));
+		
+		Config::inst()->update('SiteMedia', 'extensions', array('SiteMediaDecorator'));
 	}
 }
