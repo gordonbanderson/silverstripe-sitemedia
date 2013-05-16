@@ -87,11 +87,11 @@ class SiteMedia extends DataObject {
 		
 		$allowed_file_types = (is_array($fileTypes)) ?
 			$fileTypes :
-			Config::inst()->get($this->MediaType, 'allowed_file_types');
+			Object::get_static($this->MediaType, 'allowed_file_types');
 
 		$folder = (property_exists($this, 'media_upload_folder')) ?
-			$this->media_upload_folder :
-			Config::inst()->get($this->MediaType, 'media_upload_folder');
+			$this->media_upload_folder : 
+			Object::get_static($this->MediaType,'media_upload_folder');
 		$folder .= '/' . date('Y-m') . (($subfolder) ? '/' . $subfolder : '');
 		
 		
